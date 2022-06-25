@@ -18,12 +18,12 @@
 <div class="container bg-light text-success">
     {% if object_list %}
     <ul>
-    {% for post in object_list %}
-        <li><a href="{% url 'post:detail' post.id %}">{{ post.title }}</a></li>
+    {% for tag in object_list %}
+        <li><a href="{% url 'tag:detail' tag.id %}">{{ tag.name }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
-    <p>No posts are available.</p>
+    <p>No tags are available.</p>
 {% endif %}
-    <a href='{% url "post:new" %}'>+ New Post</a>
+    <a href='{% url "tag:new" %}'>+ New Tag</a>
 </div>

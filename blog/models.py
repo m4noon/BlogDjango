@@ -33,7 +33,7 @@ class Post(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('detail', args=[str(self.id)])
+        return reverse('post:detail', args=[str(self.id)])
 
 
 class Category(models.Model):
@@ -45,16 +45,4 @@ class Category(models.Model):
     class Meta:
         verbose_name_plural = 'Категории'
         verbose_name = 'Категория'
-        ordering = ['name']
-
-
-class Tag(models.Model):
-    name = models.CharField(max_length=64, db_index=True, verbose_name='Тег')
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name_plural = 'Теги'
-        verbose_name = 'Тег'
         ordering = ['name']

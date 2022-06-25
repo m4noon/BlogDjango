@@ -3,10 +3,10 @@
 {{post.body}}
 
 <p>
-    <a href='{% url "edit" post.pk %}'>Edit Blog Post</a>
+    <a href='{% url "post:edit" post.pk %}'>Edit Blog Post</a>
 </p>
 
 <p>
-    <a href='{% url "delete" post.pk %}'>Delete Post</a>
+    <a href='{% url "post:delete" post.pk %}'>Delete Post</a>
 </p>
 
