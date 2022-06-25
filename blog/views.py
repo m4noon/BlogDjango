@@ -1,29 +1,35 @@
 from django.shortcuts import render
-
-# Create your views here.
 from django.http import Http404
 from django.http import HttpResponse
-from .models import Post
 from django.template import loader
+from django.views.generic import ListView, DetailView
+
+from .models import Category
+from .models import Post
+from .models import Tag
 
 
 def index(request):
-    return HttpResponse("Hello, <h1 > HO HO HO </h1> world. You're at the polls index.")
-
-
-def show_all_posts(request):
     all_posts = Post.objects.order_by('-publish')[:5]
-    template = loader.get_template('blogs/show_all_posts.html')
-    context = {
-        'all_posts': all_posts,
-    }
-    return HttpResponse(template.render(context, request))
+    return render(request, 'blog/show_all_posts.html', {'all_posts': all_posts,})
 
 
-def show_post(request, post_id):
+def detail(request, post_id):
     try:
         post = Post.objects.get(pk=post_id)
     except Post.DoesNotExist:
         raise Http404("Question does not exist")
-    return render(request, 'blogs/show_post.html', {'post': post})
+    return render(request, 'blog/show_post.html', {'post': post})
 
+"""
+CRUD for Post
+CRUD for Tags
+CRUD for Category
+CRUD for Comments
+(
+Create Read(get) Update Delete
+Read -> (Index, detail(:id))
+)
+User - auth (sign in, sign up, password reset)
+Policy - current_user: manager user admin, anonimous_user
+"""
