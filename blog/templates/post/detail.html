@@ -1,12 +1,46 @@
-{{post.title}}
-<br>
-{{post.body}}
+{% extends 'base.html' %}
+{% block content %}
+    <div class="post post-single">
+        <!-- post header -->
+        <div class="post-header">
+            <h1 class="title mt-0 mb-3">{{post.title}}</h1>
+            <ul class="meta list-inline mb-0">
+                <li class="list-inline-item"><a href="#"><!--{{ post.category}}--> category</a></li>
+                <li class="list-inline-item">{{ post.publish }}</li>
+            </ul>
+        </div>
+        <!-- featured image -->
 
+        <!-- post content -->
+        <div class="post-content clearfix">
+            <p> {{post.body}} </p>
+        </div>
+        <!-- post bottom section -->
+        <div class="post-bottom">
+            <div class="row d-flex align-items-center">
+                <div class="col-md-6 col-12 text-center text-md-start">
+                    <!-- tags -->
+                    <a href="#" class="tag">#Trending</a>
+                    <a href="#" class="tag">#Video</a>
+                    <a href="#" class="tag">#Featured</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="row gx-2 gx-sm-5 justify-content-left">
+    <div class="col-md-10 col-lg-8 col-xl-7">
+        <a  class="btn btn-default btn-full mt-4 mb-4" href='{% url "post:edit" post.pk %}'>Edit Blog Post</a>
+        <a class="btn btn-default btn-full " href='{% url "post:delete" post.pk %}'>Delete Post</a>
+     </div>
+</div>
 <p>
-    <a href='{% url "post:edit" post.pk %}'>Edit Blog Post</a>
+
 </p>
 
 <p>
-    <a href='{% url "post:delete" post.pk %}'>Delete Post</a>
 </p>
+{% endblock %}
+
+
 

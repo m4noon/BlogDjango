@@ -6,4 +6,4 @@ from django.views.generic import ListView, DetailView
 
 
 def index(request):
-    return HttpResponse("Index page")
+    return render(request, template_name='index.html')
