@@ -1,17 +1,14 @@
 from django.shortcuts import render
 from django.http import Http404
-from django.http import HttpResponse
-from django.template import loader
-from django.views.generic import ListView, DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
 
-from .models import Category
 from .models import Post
-from .models import Tag
 
 
 def index(request):
     all_posts = Post.objects.order_by('-publish')[:5]
-    return render(request, 'blog/show_all_posts.html', {'all_posts': all_posts,})
+    return render(request, 'post/index.html', {'all_posts': all_posts,})
 
 
 def detail(request, post_id):
@@ -19,7 +16,25 @@ def detail(request, post_id):
         post = Post.objects.get(pk=post_id)
     except Post.DoesNotExist:
         raise Http404("Question does not exist")
-    return render(request, 'blog/show_post.html', {'post': post})
+    return render(request, 'post/detail.html', {'post': post})
+
+
+class PostCreateView(CreateView):
+    model = Post
+    template_name = 'post/new.html'
+    fields = ['title', 'slug', 'body', 'status']
+
+
+class PostUpdateView(UpdateView):
+    model = Post
+    template_name = 'post/edit.html'
+    fields = ['title', 'body', 'status']
+
+
+class PostDeleteView(DeleteView):
+    model = Post
+    template_name = 'post/delete.html'
+    success_url = reverse_lazy('index')
 
 """
 CRUD for Post
