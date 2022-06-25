@@ -2,42 +2,40 @@
 
 {% block content %}
 
-		<div class="padding-30 rounded bordered">
-			<div class="row">
-				<div class="row gx-2 gx-lg-5 justify-content-center">
-            		<div class="col-md-10 col-lg-8 col-xl-7">
-						<a class="btn btn-default btn-full" href='{% url "post:new" %}'>New Post</a>
+<div class="padding-30 rounded bordered">
+	<div class="mb-4">
+		<a class="btn btn-default" href='{% url "post:new" %}'>Новый пост</a>
+	</div>
+	<div class="row">
+		{% if object_list %}
+		{% for post in object_list %}
+			<div class="col-md-12 col-sm-6">
+				<div class="post post-list clearfix">
+					<div class="thumb rounded">
+						<span class="post-format-sm">
+							<i class="icon-picture"></i>
+						</span>
+						<a href="{% url 'post:detail' post.id %}">
+							<div class="inner">
+								<img src="https://s.ftcdn.net/v2013/pics/all/curated/0jF1GcYgKK4FQ8CkIjW4jXx20m2pC3Q2_cover_580.jpg?r=4a2f9cdc0102872f02841d05249fee8ef6db42f4" alt="post-title">
+							</div>
+						</a>
 					</div>
-
+					<div class="details">
+						<ul class="meta list-inline mb-3">
+							<li class="list-inline-item"><a href='{% url "category:detail" post.category.pk %}'> {{ post.category }} </a></li>
+							<li class="list-inline-item"> {{ post.publish }} </li>
+						</ul>
+						<h5 class="post-title"><a href="{% url 'post:detail' post.id %}">{{ post.title }}</a></h5>
+						<p class="excerpt mb-0"> {{ post.body|truncatewords:50 }} </p>
+					</div>
 				</div>
-				{% if object_list %}
-				{% for post in object_list %}
-					<div class="col-md-12 col-sm-6">
-						<div class="post post-list clearfix">
-							<div class="thumb rounded">
-								<span class="post-format-sm">
-									<i class="icon-picture"></i>
-								</span>
-								<a href="{% url 'post:detail' post.id %}">
-									<div class="inner">
-										<img src="https://s.ftcdn.net/v2013/pics/all/curated/0jF1GcYgKK4FQ8CkIjW4jXx20m2pC3Q2_cover_580.jpg?r=4a2f9cdc0102872f02841d05249fee8ef6db42f4" alt="post-title">
-									</div>
-								</a>
-							</div>
-							<div class="details">
-								<ul class="meta list-inline mb-3">
-									<li class="list-inline-item"><a href='{% url "category:detail" post.category.pk %}'> {{ post.category }} </a></li>
-									<li class="list-inline-item"> {{ post.publish }} </li>
-								</ul>
-								<h5 class="post-title"><a href="{% url 'post:detail' post.id %}">{{ post.title }}</a></h5>
-								<p class="excerpt mb-0"> {{ post.body|truncatewords:50 }} </p>
-							</div>
-						</div>
-					</div>
-			  {% endfor %}
 			</div>
-		</div>
-	{% else %}
-		<p>No posts are available.</p>
+	  	{% endfor %}
+		{% else %}
+		<p>Нет доступных постов.</p>
 	{% endif %}
+	</div>
+</div>
+
 {% endblock %}

@@ -38,10 +38,33 @@
                             color: #000000;
                         }
                      </style>
-                    <h1>Новый пост</h1>
-                    <form action="" method="post">{% csrf_token %}
-                     {{ form.as_p }}
-                         <button class="btn btn-default btn-full" type="submit">Сохранить</button>
+                    <h1>Вход в аккаунт</h1>
+                    {% if form.errors %}
+                        <p>Неверный имя пользователя и пароль.</p>
+                    {% endif %}
+                    {% if next %}
+                        {% if user.is_authenticated %}
+                            <p>Your account doesn't have access to this page. To proceed,
+                            please login with an account that has access.</p>
+                        {% else %}
+                              <p>Please login to see this page.</p>
+                         {% endif %}
+                    {% endif %}
+                    <form action="{% url 'login' %}" method="post">{% csrf_token %}
+                        <table>
+                            <tr>
+                              <td>{{ form.username.label_tag }}</td>
+                              <td>{{ form.username }}</td>
+                            </tr>
+
+                            <tr>
+                              <td>{{ form.password.label_tag }}</td>
+                              <td>{{ form.password }}</td>
+                            </tr>
+                        </table>
+                        <input class="mb-2 mt-2" type="submit" value="Войти" />
+                        <input  type="hidden" name="next" value="{{ next }}" />
+                        <a class="btn btn-default btn-full" href="{% url 'password_reset' %}">Сбросить Пароль</a>
                     </form>
                 </div>
             </div>

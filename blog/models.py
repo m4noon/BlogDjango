@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.urls import reverse
 from category.models import Category
+from tag.models import Tag
 
 class Post(models.Model):
     STATUS_CHOICES = (
@@ -12,14 +13,12 @@ class Post(models.Model):
     slug = models.SlugField(max_length=250, unique_for_date='publish')
     #author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_posts')
     body = models.TextField()
-    #tags = models.ManyToMany(Tag)
+    tags = models.ManyToManyField(Tag)
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
     category = models.ForeignKey(Category, models.SET_NULL, blank=True, null=True)
-    # objects = models.Manager()  # The default manager.
-    # published = PublishedManager()  # Custom manager.
 
     class Meta:
         ordering = ('-publish',)

@@ -1,11 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1> {{category.name}} </h1>
-    <a href='{% url "category:edit" category.pk %}'>Edit Category</a>
-    <a href='{% url "category:delete" category.pk %}'>Delete Category</a>
+<h1> Категория {{category.name}} </h1>
+
 
 		<div class="padding-30 rounded bordered">
+			<div class="mb-4">
+				<a class="btn btn-default" href='{% url "category:edit" category.pk %}'>Edit Category</a>
+				<a class="btn btn-default" href='{% url "category:delete" category.pk %}'>Delete Category</a>
+			</div>
 			<div class="row">
 				{% if posts %}
                 {% for post in posts %}
@@ -35,7 +38,7 @@
 			</div>
 		</div>
 	{% else %}
-		<p>No posts are available.</p>
+		<p>Нет доступных категорий.</p>
 	{% endif %}
 
 

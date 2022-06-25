@@ -17,10 +17,14 @@ from django.contrib import admin
 from django.urls import include, path
 from . import views
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index),
     path('post/', include('blog.urls')),
     path('tag/', include('tag.urls')),
     path('category/', include('category.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/signup/', views.signup, name='signup'),
+
 ]

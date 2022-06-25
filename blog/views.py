@@ -19,13 +19,13 @@ class PostDetailView(DetailView):
 class PostCreateView(CreateView):
     model = Post
     template_name = 'post/new.html'
-    fields = ['title', 'slug', 'body', 'status', 'category']
+    fields = ['title', 'slug', 'body', 'status', 'category', 'tags']
 
 
 class PostUpdateView(UpdateView):
     model = Post
     template_name = 'post/edit.html'
-    fields = ['title', 'body', 'status', 'category']
+    fields = ['title', 'body', 'status', 'category', 'tags']
 
 
 class PostDeleteView(DeleteView):

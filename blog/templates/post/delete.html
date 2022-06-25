@@ -6,9 +6,9 @@
         <div class="container-sm">
             <div class="mb-2">
                 <div class="form-control w-100 text-center">
-                    <h1>Delete post</h1>
+                    <h1>Удалить пост</h1>
                     <form action="" method="post">{% csrf_token %}
-                      <h6>Are you sure you want to delete "{{ post.title }}"?</h6>
+                      <h6>Вы уверены что хотите удалить "{{ post.title }}"?</h6>
                       <input class="btn btn-default btn-full " type="submit" value="Confirm" />
                     </form>
                 </div>

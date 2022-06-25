@@ -20,9 +20,9 @@
             <div class="row d-flex align-items-center">
                 <div class="col-md-6 col-12 text-center text-md-start">
                     <!-- tags -->
-                    <a href="#" class="tag">#Trending</a>
-                    <a href="#" class="tag">#Video</a>
-                    <a href="#" class="tag">#Featured</a>
+                    {% for tag in post.tags.all %}
+                    <a href="{% url 'tag:detail' tag.id %}" class="tag"> {{ tag.name }}</a>
+                    {% endfor %}
                 </div>
             </div>
         </div>
@@ -30,8 +30,8 @@
 
 <div class="row gx-2 gx-sm-5 justify-content-left">
     <div class="col-md-10 col-lg-8 col-xl-7">
-        <a  class="btn btn-default btn-full mt-4 mb-4" href='{% url "post:edit" post.pk %}'>Edit Blog Post</a>
-        <a class="btn btn-default btn-full " href='{% url "post:delete" post.pk %}'>Delete Post</a>
+        <a  class="btn btn-default  mt-4 mb-4" href='{% url "post:edit" post.pk %}'>Редактировать пост</a>
+        <a class="btn btn-default  " href='{% url "post:delete" post.pk %}'>Удалить пост</a>
      </div>
 </div>
 <p>

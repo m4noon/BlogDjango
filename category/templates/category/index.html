@@ -1,16 +1,26 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<h1> Доступные Категории </h1>
 
-    {% if object_list %}
-    <ul>
-    {% for category in object_list %}
-        <li><a href="{% url 'category:detail' category.id %}">{{ category.name }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No category are available.</p>
-{% endif %}
-    <a href='{% url "category:new" %}'>+ New Category</a>
-
+<div class="padding-30 rounded bordered">
+	<div class="row">
+		<div class="row gx-2 gx-lg-5 justify-content-left">
+			<div class="col-md-10 col-lg-8 col-xl-7 mb-4">
+				<a class="btn btn-default" href='{% url "category:new" %}'>Создать категорию</a>
+			</div>
+		</div>
+		{% if object_list %}
+			{% for category in object_list %}
+				<div class="col-md-12 col-sm-6 ">
+					<div class="post post-list clearfix">
+						<h5 class="post-title"><a href="{% url 'category:detail' category.id %}">{{ category.name }}</a></h5>
+					</div>
+				</div>
+			{% endfor %}
+		{% else %}
+			<p>Нет доступных категорий.</p>
+		{% endif %}
+	</div>
+</div>
 {% endblock %}
