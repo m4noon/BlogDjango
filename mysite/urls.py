@@ -22,4 +22,5 @@ urlpatterns = [
     path('', views.index),
     path('post/', include('blog.urls')),
     path('tag/', include('tag.urls')),
+    path('category/', include('category.urls')),
 ]

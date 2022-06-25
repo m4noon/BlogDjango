@@ -1,14 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.urls import reverse
-from django.contrib.auth.models import User
-
-
-# class PublishedManager(models.Manager):
-#     def get_queryset(self):
-#         return super(PublishedManager, self).get_queryset()\
-#                                             .filter(status='published')
-
+from category.models import Category
 
 class Post(models.Model):
     STATUS_CHOICES = (
@@ -19,10 +12,12 @@ class Post(models.Model):
     slug = models.SlugField(max_length=250, unique_for_date='publish')
     #author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_posts')
     body = models.TextField()
+    #tags = models.ManyToMany(Tag)
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
+    category = models.ForeignKey(Category, models.SET_NULL, blank=True, null=True)
     # objects = models.Manager()  # The default manager.
     # published = PublishedManager()  # Custom manager.
 
@@ -34,15 +29,3 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('post:detail', args=[str(self.id)])
-
-
-class Category(models.Model):
-    name = models.CharField(max_length=64, db_index=True, verbose_name='Название категории')
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name_plural = 'Категории'
-        verbose_name = 'Категория'
-        ordering = ['name']

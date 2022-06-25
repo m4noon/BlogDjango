@@ -1,6 +1,7 @@
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+from category.models import Category
 
 from .models import Post
 
@@ -18,13 +19,13 @@ class PostDetailView(DetailView):
 class PostCreateView(CreateView):
     model = Post
     template_name = 'post/new.html'
-    fields = ['title', 'slug', 'body', 'status']
+    fields = ['title', 'slug', 'body', 'status', 'category']
 
 
 class PostUpdateView(UpdateView):
     model = Post
     template_name = 'post/edit.html'
-    fields = ['title', 'body', 'status']
+    fields = ['title', 'body', 'status', 'category']
 
 
 class PostDeleteView(DeleteView):
