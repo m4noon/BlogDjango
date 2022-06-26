@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load auth_extras %}
+{% load comments %}
 {% block content %}
     <div class="post post-single col-lg-8">
         <!-- post header -->
@@ -34,21 +35,61 @@
     </div>
 
 <div class="row gx-2 gx-sm-5 justify-content-left">
-    {% if request.user|has_group:"manager" %}
 		 <div class="col-md-10 col-lg-8 col-xl-7">
-        <a  class="btn btn-default  mt-4 mb-4" href='{% url "post:edit" post.pk %}'>Редактировать пост</a>
-        <a class="btn btn-default  " href='{% url "post:delete" post.pk %}'>Удалить пост</a>
+         {% if request.user|has_group:"manager" %}
+            <a  class="btn btn-default  mt-4 mb-4" href='{% url "post:edit" post.pk %}'>Редактировать пост</a>
+            <a class="btn btn-default  " href='{% url "post:delete" post.pk %}'>Удалить пост</a>
+        {% endif %}
+ <style>
+input {
+   display: block;
+    border-radius: 25px;
+    width: 100%;
+    padding: 8px 24px;
+    font-size: 18px;
+    line-height: 1.6;
+    color: #fe6074;
+    background-color: #FFF;
+    background-image: none;
+    border: solid 2px #fe6074;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+   }
+   textarea {
+   display: block;
+    border-radius: 25px;
+    width: 100%;
+    padding: 8px 24px;
+    font-size: 18px;
+    line-height: 1.6;
+    color: #fe6074;
+    background-color: #FFF;
+    background-image: none;
+    border: solid 2px #fe6074;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+   }
+    label {
+        color: #000000;
+    }
+ </style>
+{% render_comment_list for post %}
+    {% if user.is_authenticated %}
+        {% get_comment_form for object as form %}
+        <form action="{% comment_form_target %}" method="POST">
+        {% csrf_token %}
+        {{ form.comment }}
+        {{ form.content_type }}
+        {{ form.object_pk }}
+        {{ form.timestamp }}
+        {{ form.security_hash }}
+        <input  type="hidden" name="next" value="{% url 'post:detail' post.id %}" />
+        <input class="mt-2 btn btn-default" type="submit" value="Add comment" id="id_submit" />
+        </form>
+    {% else %}
+        <h6>Пожалуйста <a href="/accounts/login/">войдите</a> чтобы оставить комментарий.</h6>
+    {% endif %}
      </div>
-	{% endif %}
-
 </div>
-<p>
-
-</p>
-
-<p>
-</p>
 {% endblock %}
-
-
 

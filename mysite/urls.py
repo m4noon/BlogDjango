@@ -27,7 +27,7 @@ urlpatterns = [
     path('category/', include('category.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/signup/', views.signup, name='signup'),
-
+    path('comments/', include('django_comments.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
