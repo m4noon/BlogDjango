@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load auth_extras %}
 {% load static %}
 {% load bootstrap5 %}
 {% bootstrap_css %}
@@ -35,14 +36,15 @@
 					<!-- menus -->
 					<ul class="navbar-nav mr-auto">
 						<li class="nav-item dropdown active">
-							<a class="nav-link dropdown-toggle" href="/">Home</a>
-							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="index.html">Magazine</a></li>
-								<li><a class="dropdown-item" href="personal.html">Personal</a></li>
-								<li><a class="dropdown-item" href="personal-alt.html">Personal Alt</a></li>
-								<li><a class="dropdown-item" href="minimal.html">Minimal</a></li>
-								<li><a class="dropdown-item" href="classic.html">Classic</a></li>
-							</ul>
+							<a class="nav-link" href="/">Home</a>
+<!--							dropdown-toggle-->
+<!--							<ul class="dropdown-menu">-->
+<!--								<li><a class="dropdown-item" href="index.html">Magazine</a></li>-->
+<!--								<li><a class="dropdown-item" href="personal.html">Personal</a></li>-->
+<!--								<li><a class="dropdown-item" href="personal-alt.html">Personal Alt</a></li>-->
+<!--								<li><a class="dropdown-item" href="minimal.html">Minimal</a></li>-->
+<!--								<li><a class="dropdown-item" href="classic.html">Classic</a></li>-->
+<!--							</ul>-->
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="/post/">All Posts</a>
@@ -72,11 +74,23 @@
 						<li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
 						<li class="list-inline-item"><a href="#"><i class="fab fa-instagram"></i></a></li>
 						<li class="list-inline-item"><a href="#"><i class="fab fa-pinterest"></i></a></li>
-						<li class="list-inline-item"><a href="#"><i class="fab fa-medium"></i></a></li>
 						<li class="list-inline-item"><a href="#"><i class="fab fa-youtube"></i></a></li>
 					</ul>
 					<!-- header buttons -->
 					<div class="header-buttons">
+						{% if user.is_authenticated %}
+							<button type="button" class="btn btn-default" onclick="document.location='/accounts/logout/'">
+								<i class="far fa-user pr-2" aria-hidden="true">Выйти</i>
+							</button>
+							{% else %}
+								<button type="button" class="btn btn-default" onclick="document.location='/accounts/login/'">
+									<i class="far fa-user pr-2" aria-hidden="true">Войти</i>
+								</button>
+								<button type="button" class="btn btn-default" onclick="document.location='/accounts/signup/'">
+									<i class="far fa-user pr-2" aria-hidden="true">Зарегистрироваться</i>
+								</button>
+							{% endif %}
+
 						<button class="search icon-button">
 							<i class="icon-magnifier"></i>
 						</button>
@@ -113,7 +127,6 @@
 							<li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
 							<li class="list-inline-item"><a href="#"><i class="fab fa-instagram"></i></a></li>
 							<li class="list-inline-item"><a href="#"><i class="fab fa-pinterest"></i></a></li>
-							<li class="list-inline-item"><a href="#"><i class="fab fa-medium"></i></a></li>
 							<li class="list-inline-item"><a href="#"><i class="fab fa-youtube"></i></a></li>
 						</ul>
 					</div>
@@ -126,7 +139,7 @@
 			</div>
 		</div>
 	</footer>
-
 </div>
+
 </body>
 </html>

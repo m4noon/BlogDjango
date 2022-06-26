@@ -2,6 +2,9 @@ from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from blog.models import Post
+from django.contrib.auth.mixins import LoginRequiredMixin
+from braces.views import GroupRequiredMixin
+
 
 from .models import Tag
 
@@ -22,19 +25,22 @@ class TagDetailView(DetailView):
         return context
 
 
-class TagCreateView(CreateView):
+class TagCreateView(LoginRequiredMixin, GroupRequiredMixin, CreateView):
     model = Tag
     template_name = 'tag/new.html'
     fields = ['name']
+    group_required = u"manager"
 
 
-class TagUpdateView(UpdateView):
+class TagUpdateView(LoginRequiredMixin, GroupRequiredMixin, UpdateView):
     model = Tag
     template_name = 'tag/edit.html'
     fields = ['name']
+    group_required = u"manager"
 
 
-class TagDeleteView(DeleteView):
+class TagDeleteView(LoginRequiredMixin, GroupRequiredMixin, DeleteView):
     model = Tag
     template_name = 'tag/delete.html'
     success_url = reverse_lazy('tag:index')
+    group_required = u"manager"

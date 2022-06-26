@@ -1,37 +1,100 @@
 {% extends 'base.html' %}
 {% block content %}
+
 <section class="main-content">
 		<div class="container-xl">
 			<div class="row gy-4">
 				<div class="col-lg-8">
 					<!-- section header -->
                     <!--  Category-->
-					<div class="section-header">
-						<h3 class="section-title">Editor’s Pick</h3>
-					</div>
-					<div class="padding-30 rounded bordered">
-						<div class="row gy-5">
-							<div class="col-sm-6">
-								<!-- post first-->
-								<div class="post">
-									<h5 class="post-title mb-3 mt-3"><a href="blog-single.html">15 Unheard Ways To Achieve Greater Walker</a></h5>
-									<p class="excerpt mb-0">A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy</p>
+<!--					<div class="section-header">-->
+<!--						<h3 class="section-title">Editor’s Pick</h3>-->
+<!--					</div>-->
+					{% if categories %}
+						{% for category, posts in categories_with_posts.items %}
+							<div class="col-md-12 col-sm-6 ">
+								<div class=" clearfix">
+<!--									<h5 class="post-title"><a href="{% url 'category:detail' category.id %}">{{ category.name }}</a></h5>-->
 								</div>
 							</div>
-                            <!-- rest posts -->
-							<div class="col-sm-6">
-								<!-- post -->
-								<div class="post post-list-sm square">
-									<div class="details clearfix">
-										<h6 class="post-title my-0"><a href="blog-single.html">3 Easy Ways To Make Your iPhone Faster</a></h6>
-										<ul class="meta list-inline mt-1 mb-0">
-											<li class="list-inline-item">29 March 2021</li>
-										</ul>
+								<div class="padding-30 rounded bordered">
+									<div class="row gy-5">
+										{% if posts %}
+											{% for post in posts %}
+												{% if forloop.first %}
+													<div class="col-sm-6">
+														<!-- post first-->
+														<div class="post">
+															<div class="thumb rounded">
+																<a href="{% url 'category:detail' category.id %}" class="category-badge position-absolute">{{ category.name }}</a>
+																<span class="post-format">
+																	<i class="icon-picture"></i>
+																</span>
+																<a href="{% url 'post:detail' post.id %}">
+																	<div class="inner">
+																		<img src="/media/{{ post.image }}" alt="{{ post.title }}">
+																	</div>
+																</a>
+															</div>
+															<ul class="meta list-inline mt-1 mb-0">
+																<li class="list-inline-item">{{ post.author}}</li>
+																<li class="list-inline-item">{{ post.publish }}</li>
+															</ul>
+															<h5 class="post-title mb-3 mt-3"><a href="{% url 'post:detail' post.id %}">{{ post.title }}</a></h5>
+															<p class="excerpt mb-0">{{ post.body|truncatewords:50|truncatechars:250 }}</p>
+														</div>
+													</div>
+												<div class="col-sm-6">
+												{% else %}
+													<!-- rest posts -->
+
+														<!-- post -->
+														<div class="post post-list-sm square">
+															<div class="details clearfix">
+																<h6 class="post-title my-0"><a href="{% url 'post:detail' post.id %}">{{ post.title }}</a></h6>
+																<ul class="meta list-inline mt-1 mb-0">
+																	<li class="list-inline-item">{{ post.publish }}</li>
+																</ul>
+															</div>
+														</div>
+
+												{% endif %}
+											{% endfor %}
+												</div>
+										{% else %}
+											<p>Нет доступных новостей.</p>
+										{% endif %}
 									</div>
 								</div>
-							</div>
-						</div>
-					</div>
+						{% endfor %}
+					{% else %}
+						<p>Нет доступных категорий.</p>
+					{% endif %}
+
+
+<!--					<div class="padding-30 rounded bordered">-->
+<!--						<div class="row gy-5">-->
+<!--							<div class="col-sm-6">-->
+<!--								&lt;!&ndash; post first&ndash;&gt;-->
+<!--								<div class="post">-->
+<!--									<h5 class="post-title mb-3 mt-3"><a href="blog-single.html">15 Unheard Ways To Achieve Greater Walker</a></h5>-->
+<!--									<p class="excerpt mb-0">A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy</p>-->
+<!--								</div>-->
+<!--							</div>-->
+<!--                            &lt;!&ndash; rest posts &ndash;&gt;-->
+<!--							<div class="col-sm-6">-->
+<!--								&lt;!&ndash; post &ndash;&gt;-->
+<!--								<div class="post post-list-sm square">-->
+<!--									<div class="details clearfix">-->
+<!--										<h6 class="post-title my-0"><a href="blog-single.html">3 Easy Ways To Make Your iPhone Faster</a></h6>-->
+<!--										<ul class="meta list-inline mt-1 mb-0">-->
+<!--											<li class="list-inline-item">29 March 2021</li>-->
+<!--										</ul>-->
+<!--									</div>-->
+<!--								</div>-->
+<!--							</div>-->
+<!--						</div>-->
+<!--					</div>-->
 					<div class="spacer" data-height="50"></div>
                 </div>
             </div>

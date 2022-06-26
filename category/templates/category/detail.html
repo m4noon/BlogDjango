@@ -1,14 +1,18 @@
 {% extends 'base.html' %}
+{% load auth_extras %}
 
 {% block content %}
 <h1> Категория {{category.name}} </h1>
 
 
 		<div class="padding-30 rounded bordered">
-			<div class="mb-4">
-				<a class="btn btn-default" href='{% url "category:edit" category.pk %}'>Edit Category</a>
-				<a class="btn btn-default" href='{% url "category:delete" category.pk %}'>Delete Category</a>
-			</div>
+			{% if request.user|has_group:"manager" %}
+				<div class="mb-4">
+					<a class="btn btn-default" href='{% url "category:edit" category.pk %}'>Редактировать категорию</a>
+					<a class="btn btn-default" href='{% url "category:delete" category.pk %}'>Удалить категорию</a>
+				</div>
+			{% endif %}
+
 			<div class="row">
 				{% if posts %}
                 {% for post in posts %}
@@ -37,9 +41,9 @@
 			  {% endfor %}
 			</div>
 		</div>
-	{% else %}
-		<p>Нет доступных категорий.</p>
-	{% endif %}
+				{% else %}
+					<p>Нет доступных новостей.</p>
+				{% endif %}
 
 
 {% endblock %}

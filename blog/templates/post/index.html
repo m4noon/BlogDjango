@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
-
+{% load auth_extras %}
 {% block content %}
 
 <div class="padding-30 rounded bordered">
-	<div class="mb-4">
-		<a class="btn btn-default" href='{% url "post:new" %}'>Новый пост</a>
-	</div>
+	{% if request.user|has_group:"manager" %}
+		<div class="mb-4">
+			<a class="btn btn-default" href='{% url "post:new" %}'>Новый пост</a>
+		</div>
+	{% endif %}
 	<div class="row">
 		{% if object_list %}
 		{% for post in object_list %}
@@ -17,12 +19,17 @@
 						</span>
 						<a href="{% url 'post:detail' post.id %}">
 							<div class="inner">
-								<img src="https://s.ftcdn.net/v2013/pics/all/curated/0jF1GcYgKK4FQ8CkIjW4jXx20m2pC3Q2_cover_580.jpg?r=4a2f9cdc0102872f02841d05249fee8ef6db42f4" alt="post-title">
+								{% if post.image %}
+								<img src="/media/{{ post.image }}" alt="post-title">
+								{% else %}
+									<img src="/meida/std_img.jpg" alt="post-title">
+								{% endif %}
 							</div>
 						</a>
 					</div>
 					<div class="details">
 						<ul class="meta list-inline mb-3">
+							<li class="list-inline-item"> {{post.author }} </li>
 							<li class="list-inline-item"><a href='{% url "category:detail" post.category.pk %}'> {{ post.category }} </a></li>
 							<li class="list-inline-item"> {{ post.publish }} </li>
 						</ul>
