@@ -19,6 +19,7 @@ from . import views
 from django.conf import settings
 from django.conf.urls.static import static
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index),
@@ -27,6 +28,7 @@ urlpatterns = [
     path('category/', include('category.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/signup/', views.signup, name='signup'),
+    path('accounts/', include('allauth.urls')),
     path('comments/', include('django_comments.urls')),
 ]
 if settings.DEBUG:

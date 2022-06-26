@@ -7,9 +7,6 @@ from category.models import Category
 from blog.models import Post
 
 
-# def index(request):
-#     return render(request, template_name='index.html')
-
 def index(request):
     template = 'index.html'
     categories_with_posts = dict()
@@ -21,11 +18,6 @@ def index(request):
         "categories_with_posts": categories_with_posts,
     }
     return render(request, template, context)
-
-
-# class CategoryListView(ListView):
-#     model = Category
-#     template_name = 'index.html'
 
 
 def signup(request):
