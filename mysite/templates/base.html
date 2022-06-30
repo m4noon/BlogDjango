@@ -106,40 +106,6 @@
 						</div>
 					</div>
 
-					<!-- widget popular posts -->
-					<div class="widget rounded">
-						<div class="widget-header text-center">
-							<h3 class="widget-title">Популярные посты</h3>
-							<img src="/static/images/wave.svg" class="wave" alt="wave" />
-						</div>
-						<div class="widget-content">
-
-							<!-- post -->
-							<div class="post post-list-sm circle">
-								{% if posts %}
-									{% for post in posts %}
-									<div class="thumb circle mb-4">
-										<span class="number">{{ forloop.counter }}</span>
-										<a href="{% url 'post:detail' post.id %}">
-											<div class="inner">
-												<img src="/media/{{ post.image }}" alt="{{ post.title }}" />
-											</div>
-										</a>
-									</div>
-									<div class="details clearfix">
-										<h6 class="post-title my-0"><a href="{% url 'post:detail' post.id %}">{{ post.title }}</a></h6>
-										<ul class="meta list-inline mt-1 mb-0">
-											<li class="list-inline-item">{{ post.publish }}</li>
-										</ul>
-									</div>
-									{% endfor %}
-								{% else %}
-									<p>Нет доступных новостей.</p>
-								{% endif %}
-							</div>
-						</div>
-					</div>
-
 					<!-- widget categories -->
 					<div class="widget rounded">
 						<div class="widget-header text-center">
