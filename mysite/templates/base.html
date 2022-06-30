@@ -5,7 +5,6 @@
 {% bootstrap_css %}
 {% bootstrap_javascript %}
 
-
 <html lang="en-US">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -37,59 +36,39 @@
 					<ul class="navbar-nav mr-auto">
 						<li class="nav-item dropdown active">
 							<a class="nav-link" href="/">Home</a>
-<!--							dropdown-toggle-->
-<!--							<ul class="dropdown-menu">-->
-<!--								<li><a class="dropdown-item" href="index.html">Magazine</a></li>-->
-<!--								<li><a class="dropdown-item" href="personal.html">Personal</a></li>-->
-<!--								<li><a class="dropdown-item" href="personal-alt.html">Personal Alt</a></li>-->
-<!--								<li><a class="dropdown-item" href="minimal.html">Minimal</a></li>-->
-<!--								<li><a class="dropdown-item" href="classic.html">Classic</a></li>-->
-<!--							</ul>-->
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="/post/">All Posts</a>
+							<a class="nav-link" href="/post/">Посты</a>
 						</li>
 						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="{% url 'category:index' %}">Categories</a>
+							<a class="nav-link dropdown-toggle" href="{% url 'category:index' %}">Категории</a>
 							<ul class="dropdown-menu">
 								{% for cat in categories %}
 								<li>
 									<a class="dropdown-item" href="{% url 'category:detail' cat.id %}">	{{ cat.name }} </a>
 								</li>
 								{% endfor %}
-
 							</ul>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="{% static 'contact.html' %}">Contact</a>
 						</li>
 					</ul>
 				</div>
 
 				<!-- header right section -->
 				<div class="header-right">
-					<!-- social icons -->
-					<ul class="social-icons list-unstyled list-inline mb-0">
-						<li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-						<li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
-						<li class="list-inline-item"><a href="#"><i class="fab fa-instagram"></i></a></li>
-						<li class="list-inline-item"><a href="#"><i class="fab fa-pinterest"></i></a></li>
-						<li class="list-inline-item"><a href="#"><i class="fab fa-youtube"></i></a></li>
-					</ul>
 					<!-- header buttons -->
 					<div class="header-buttons">
 						{% if user.is_authenticated %}
 							<button type="button" class="btn btn-default" onclick="document.location='/accounts/logout/'">
 								<i class="far fa-user pr-2" aria-hidden="true">Выйти</i>
 							</button>
-							{% else %}
-								<button type="button" class="btn btn-default" onclick="document.location='/accounts/login/'">
-									<i class="far fa-user pr-2" aria-hidden="true">Войти</i>
-								</button>
-								<button type="button" class="btn btn-default" onclick="document.location='/accounts/signup/'">
-									<i class="far fa-user pr-2" aria-hidden="true">Зарегистрироваться</i>
-								</button>
-							{% endif %}
+						{% else %}
+							<button type="button" class="btn btn-default" onclick="document.location='/accounts/login/'">
+								<i class="far fa-user pr-2" aria-hidden="true">Войти</i>
+							</button>
+							<button type="button" class="btn btn-default" onclick="document.location='/accounts/signup/'">
+								<i class="far fa-user pr-2" aria-hidden="true">Зарегистрироваться</i>
+							</button>
+						{% endif %}
 
 						<button class="search icon-button">
 							<i class="icon-magnifier"></i>
@@ -116,13 +95,12 @@
 					<div class="widget rounded">
 						<div class="widget-about data-bg-image text-center" style="background-image: url('/static/images/map-bg.png');">
 							<img src="/static/images/logo.svg" alt="logo" class="mb-4" />
-							<p class="mb-4">FILL MEE</p>
+							<p class="mb-4">Добро пожаловать на новостной сайт. Здесь вы можете найти самые актуальные новости.</p>
 							<ul class="social-icons list-unstyled list-inline mb-0">
 								<li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
 								<li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
 								<li class="list-inline-item"><a href="#"><i class="fab fa-instagram"></i></a></li>
 								<li class="list-inline-item"><a href="#"><i class="fab fa-pinterest"></i></a></li>
-								<li class="list-inline-item"><a href="#"><i class="fab fa-medium"></i></a></li>
 								<li class="list-inline-item"><a href="#"><i class="fab fa-youtube"></i></a></li>
 							</ul>
 						</div>
@@ -131,60 +109,33 @@
 					<!-- widget popular posts -->
 					<div class="widget rounded">
 						<div class="widget-header text-center">
-							<h3 class="widget-title">Popular Posts</h3>
-							<img src="images/wave.svg" class="wave" alt="wave" />
+							<h3 class="widget-title">Популярные посты</h3>
+							<img src="/static/images/wave.svg" class="wave" alt="wave" />
 						</div>
 						<div class="widget-content">
+
 							<!-- post -->
 							<div class="post post-list-sm circle">
-								<div class="thumb circle">
-									<span class="number">1</span>
-									<a href="blog-single.html">
-										<div class="inner">
-											<img src="images/posts/tabs-1.jpg" alt="post-title" />
-										</div>
-									</a>
-								</div>
-								<div class="details clearfix">
-									<h6 class="post-title my-0"><a href="blog-single.html">3 Easy Ways To Make Your iPhone Faster</a></h6>
-									<ul class="meta list-inline mt-1 mb-0">
-										<li class="list-inline-item">29 March 2021</li>
-									</ul>
-								</div>
-							</div>
-							<!-- post -->
-							<div class="post post-list-sm circle">
-								<div class="thumb circle">
-									<span class="number">2</span>
-									<a href="blog-single.html">
-										<div class="inner">
-											<img src="images/posts/tabs-2.jpg" alt="post-title" />
-										</div>
-									</a>
-								</div>
-								<div class="details clearfix">
-									<h6 class="post-title my-0"><a href="blog-single.html">An Incredibly Easy Method That Works For All</a></h6>
-									<ul class="meta list-inline mt-1 mb-0">
-										<li class="list-inline-item">29 March 2021</li>
-									</ul>
-								</div>
-							</div>
-							<!-- post -->
-							<div class="post post-list-sm circle">
-								<div class="thumb circle">
-									<span class="number">3</span>
-									<a href="blog-single.html">
-										<div class="inner">
-											<img src="images/posts/tabs-3.jpg" alt="post-title" />
-										</div>
-									</a>
-								</div>
-								<div class="details clearfix">
-									<h6 class="post-title my-0"><a href="blog-single.html">10 Ways To Immediately Start Selling Furniture</a></h6>
-									<ul class="meta list-inline mt-1 mb-0">
-										<li class="list-inline-item">29 March 2021</li>
-									</ul>
-								</div>
+								{% if posts %}
+									{% for post in posts %}
+									<div class="thumb circle mb-4">
+										<span class="number">{{ forloop.counter }}</span>
+										<a href="{% url 'post:detail' post.id %}">
+											<div class="inner">
+												<img src="/media/{{ post.image }}" alt="{{ post.title }}" />
+											</div>
+										</a>
+									</div>
+									<div class="details clearfix">
+										<h6 class="post-title my-0"><a href="{% url 'post:detail' post.id %}">{{ post.title }}</a></h6>
+										<ul class="meta list-inline mt-1 mb-0">
+											<li class="list-inline-item">{{ post.publish }}</li>
+										</ul>
+									</div>
+									{% endfor %}
+								{% else %}
+									<p>Нет доступных новостей.</p>
+								{% endif %}
 							</div>
 						</div>
 					</div>
@@ -208,111 +159,35 @@
 					<!-- widget newsletter -->
 					<div class="widget rounded">
 						<div class="widget-header text-center">
-							<h3 class="widget-title">Newsletter</h3>
-							<img src="images/wave.svg" class="wave" alt="wave" />
+							<h3 class="widget-title">Новостная рассылка</h3>
+							<img src="/static/images/wave.svg" class="wave" alt="wave" />
 						</div>
 						<div class="widget-content">
-							<span class="newsletter-headline text-center mb-3">Join 70,000 subscribers!</span>
+							<span class="newsletter-headline text-center mb-3">Подписывайтесь и не упустите важную новость!</span>
 							<form>
 								<div class="mb-2">
 									<input class="form-control w-100 text-center" placeholder="Email address…" type="email">
 								</div>
-								<button class="btn btn-default btn-full" type="submit">Sign Up</button>
+								<button class="btn btn-default btn-full" type="submit">Подписаться</button>
 							</form>
-							<span class="newsletter-privacy text-center mt-3">By signing up, you agree to our <a href="#">Privacy Policy</a></span>
+							<span class="newsletter-privacy text-center mt-3">Регистрируясь, вы соглашаетесь с нашей <a href="#">политикой конфиденциальности</a></span>
 						</div>
-					</div>
-
-					<!-- widget post carousel -->
-					<div class="widget rounded">
-						<div class="widget-header text-center">
-							<h3 class="widget-title">Celebration</h3>
-							<img src="images/wave.svg" class="wave" alt="wave" />
-						</div>
-						<div class="widget-content">
-							<div class="post-carousel-widget">
-								<!-- post -->
-								<div class="post post-carousel">
-									<div class="thumb rounded">
-										<a href="category.html" class="category-badge position-absolute">How to</a>
-										<a href="blog-single.html">
-											<div class="inner">
-												<img src="images/widgets/widget-carousel-1.jpg" alt="post-title" />
-											</div>
-										</a>
-									</div>
-									<h5 class="post-title mb-0 mt-4"><a href="blog-single.html">5 Easy Ways You Can Turn Future Into Success</a></h5>
-									<ul class="meta list-inline mt-2 mb-0">
-										<li class="list-inline-item"><a href="#">Katen Doe</a></li>
-										<li class="list-inline-item">29 March 2021</li>
-									</ul>
-								</div>
-								<!-- post -->
-								<div class="post post-carousel">
-									<div class="thumb rounded">
-										<a href="category.html" class="category-badge position-absolute">Trending</a>
-										<a href="blog-single.html">
-											<div class="inner">
-												<img src="images/widgets/widget-carousel-2.jpg" alt="post-title" />
-											</div>
-										</a>
-									</div>
-									<h5 class="post-title mb-0 mt-4"><a href="blog-single.html">Master The Art Of Nature With These 7 Tips</a></h5>
-									<ul class="meta list-inline mt-2 mb-0">
-										<li class="list-inline-item"><a href="#">Katen Doe</a></li>
-										<li class="list-inline-item">29 March 2021</li>
-									</ul>
-								</div>
-								<!-- post -->
-								<div class="post post-carousel">
-									<div class="thumb rounded">
-										<a href="category.html" class="category-badge position-absolute">How to</a>
-										<a href="blog-single.html">
-											<div class="inner">
-												<img src="images/widgets/widget-carousel-1.jpg" alt="post-title" />
-											</div>
-										</a>
-									</div>
-									<h5 class="post-title mb-0 mt-4"><a href="blog-single.html">5 Easy Ways You Can Turn Future Into Success</a></h5>
-									<ul class="meta list-inline mt-2 mb-0">
-										<li class="list-inline-item"><a href="#">Katen Doe</a></li>
-										<li class="list-inline-item">29 March 2021</li>
-									</ul>
-								</div>
-							</div>
-							<!-- carousel arrows -->
-							<div class="slick-arrows-bot">
-								<button type="button" data-role="none" class="carousel-botNav-prev slick-custom-buttons" aria-label="Previous"><i class="icon-arrow-left"></i></button>
-								<button type="button" data-role="none" class="carousel-botNav-next slick-custom-buttons" aria-label="Next"><i class="icon-arrow-right"></i></button>
-							</div>
-						</div>
-					</div>
-
-					<!-- widget advertisement -->
-					<div class="widget no-container rounded text-md-center">
-						<span class="ads-title">- Sponsored Ad -</span>
-						<a href="#" class="widget-ads">
-							<img src="images/ads/ad-360.png" alt="Advertisement" />
-						</a>
 					</div>
 
 					<!-- widget tags -->
 					<div class="widget rounded">
 						<div class="widget-header text-center">
-							<h3 class="widget-title">Tag Clouds</h3>
-							<img src="images/wave.svg" class="wave" alt="wave" />
+							<h3 class="widget-title">Навигатор тэгов</h3>
+							<img src="/static/images/wave.svg" class="wave" alt="wave" />
 						</div>
 						<div class="widget-content">
-							<a href="#" class="tag">#Trending</a>
-							<a href="#" class="tag">#Video</a>
-							<a href="#" class="tag">#Featured</a>
-							<a href="#" class="tag">#Gallery</a>
-							<a href="#" class="tag">#Celebrities</a>
+							{% for tag in tags %}
+								<a href="{% url 'tag:detail' tag.id %}" class="tag"> {{ tag.name }}</a>
+							{% endfor %}
 						</div>
 					</div>
-
 				</div>
-				</div>
+			</div>
 			</div>
 		</div>
 	</section>

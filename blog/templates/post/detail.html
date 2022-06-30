@@ -2,47 +2,47 @@
 {% load auth_extras %}
 {% load comments %}
 {% block content %}
-    <div class="post post-single col-lg-8">
-        <!-- post header -->
-        <div class="post-header">
-            <h1 class="title mt-0 mb-3">{{post.title}}</h1>
-            <ul class="meta list-inline mb-0">
-                <li class="list-inline-item"> {{post.author }} </li>
-                <li class="list-inline-item"><a href="{% url 'category:detail' post.category.pk %}"> {{ post.category}} </a></li>
-                <li class="list-inline-item">{{ post.publish }}</li>
-            </ul>
-        </div>
-
-        <!-- featured image -->
-        <div class="featured-image">
-            <img src="/media/{{ post.image }}" alt="post-title">
-        </div>
-        <!-- post content -->
-        <div class="post-content clearfix">
-            <p> {{post.body}} </p>
-        </div>
-        <!-- post bottom section -->
-        <div class="post-bottom">
-            <div class="row d-flex align-items-center">
-                <div class="col-md-6 col-12 text-center text-md-start">
-                    <!-- tags -->
-                    {% for tag in post.tags.all %}
-                    <a href="{% url 'tag:detail' tag.id %}" class="tag"> {{ tag.name }}</a>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
+<div class="post post-single col-lg-8">
+    <!-- post header -->
+    <div class="post-header">
+        <h1 class="title mt-0 mb-3">{{post.title}}</h1>
+        <ul class="meta list-inline mb-0">
+            <li class="list-inline-item"> {{post.author }} </li>
+            <li class="list-inline-item"><a href="{% url 'category:detail' post.category.pk %}"> {{ post.category}} </a></li>
+            <li class="list-inline-item">{{ post.publish }}</li>
+        </ul>
     </div>
+
+    <!-- featured image -->
+    <div class="featured-image">
+        <img src="/media/{{ post.image }}" alt="post-title">
+    </div>
+    <!-- post content -->
+    <div class="post-content clearfix">
+        <p> {{post.body}} </p>
+    </div>
+    <!-- post bottom section -->
+    <div class="post-bottom">
+<!--        <div class="row d-flex align-items-center">-->
+            <div class="col-md-6 col-12 text-center text-md-start">
+                <!-- tags -->
+                {% for tag in post.tags.all %}
+                    <a href="{% url 'tag:detail' tag.id %}" class="tag"> {{ tag.name }}</a>
+                {% endfor %}
+            </div>
+<!--        </div>-->
+    </div>
+</div>
 
 <div class="row gx-2 gx-sm-5 justify-content-left">
 		 <div class="col-md-10 col-lg-8 col-xl-7">
          {% if request.user|has_group:"manager" %}
-            <a  class="btn btn-default  mt-4 mb-4" href='{% url "post:edit" post.pk %}'>Редактировать пост</a>
-            <a class="btn btn-default  " href='{% url "post:delete" post.pk %}'>Удалить пост</a>
+            <a  class="btn btn-default mt-4 mb-4" href='{% url "post:edit" post.pk %}'>Редактировать пост</a>
+            <a class="btn btn-default" href='{% url "post:delete" post.pk %}'>Удалить пост</a>
         {% endif %}
- <style>
+<style>
 input {
-   display: block;
+    display: block;
     border-radius: 25px;
     width: 100%;
     padding: 8px 24px;
@@ -55,8 +55,8 @@ input {
     -webkit-box-shadow: none;
     box-shadow: none;
    }
-   textarea {
-   display: block;
+    textarea {
+    display: block;
     border-radius: 25px;
     width: 100%;
     padding: 8px 24px;
@@ -72,7 +72,7 @@ input {
     label {
         color: #000000;
     }
- </style>
+</style>
 {% render_comment_list for post %}
     {% if user.is_authenticated %}
         {% get_comment_form for object as form %}
@@ -84,7 +84,7 @@ input {
         {{ form.timestamp }}
         {{ form.security_hash }}
         <input  type="hidden" name="next" value="{% url 'post:detail' post.id %}" />
-        <input class="mt-2 btn btn-default" type="submit" value="Add comment" id="id_submit" />
+        <input class="mt-2 btn btn-default" type="submit" value="Добавить комментарий" id="id_submit" />
         </form>
     {% else %}
         <h6>Пожалуйста <a href="/accounts/login/">войдите</a> чтобы оставить комментарий.</h6>

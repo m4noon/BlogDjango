@@ -4,19 +4,18 @@
 {% block content %}
 <h1> Категория {{category.name}} </h1>
 
+<div class="padding-30 rounded bordered">
+	{% if request.user|has_group:"manager" %}
+		<div class="mb-4">
+			<a class="btn btn-default" href='{% url "category:edit" category.pk %}'>Редактировать категорию</a>
+			<a class="btn btn-default" href='{% url "category:delete" category.pk %}'>Удалить категорию</a>
+		</div>
+	{% endif %}
 
-	<div class="padding-30 rounded bordered">
-		{% if request.user|has_group:"manager" %}
-			<div class="mb-4">
-				<a class="btn btn-default" href='{% url "category:edit" category.pk %}'>Редактировать категорию</a>
-				<a class="btn btn-default" href='{% url "category:delete" category.pk %}'>Удалить категорию</a>
-			</div>
-		{% endif %}
-
-		<div class="row">
-			<div class="col-md-12 col-sm-6">
-				{% if posts %}
-					 {% for post in posts %}
+	<div class="row">
+		<div class="col-md-12 col-sm-6">
+			{% if posts %}
+				{% for post in posts %}
 					<div class="post post-list clearfix">
 						<div class="thumb rounded">
 							<span class="post-format-sm">
@@ -24,7 +23,7 @@
 							</span>
 							<a href="{% url 'post:detail' post.id %}">
 								<div class="inner">
-									<img src="https://s.ftcdn.net/v2013/pics/all/curated/0jF1GcYgKK4FQ8CkIjW4jXx20m2pC3Q2_cover_580.jpg?r=4a2f9cdc0102872f02841d05249fee8ef6db42f4" alt="post-title">
+									<img src="/media/{{ post.image }}" alt="{{ post.title }}">
 								</div>
 							</a>
 						</div>
@@ -37,11 +36,11 @@
 							<p class="excerpt mb-0"> {{ post.body|truncatewords:50 }} </p>
 						</div>
 					</div>
-					{% endfor %}
-					{% else %}
+				{% endfor %}
+			{% else %}
 				<p>Нет доступных новостей.</p>
-				{% endif %}
-			</div>
+			{% endif %}
 		</div>
 	</div>
+</div>
 {% endblock %}

@@ -40,16 +40,3 @@ class PostDeleteView(LoginRequiredMixin, GroupRequiredMixin, DeleteView):
     model = Post
     template_name = 'post/delete.html'
     success_url = reverse_lazy('post:index')
-
-"""
-CRUD for Post
-CRUD for Tags
-CRUD for Category
-CRUD for Comments
-(
-Create Read(get) Update Delete
-Read -> (Index, detail(:id))
-)
-User - auth (sign in, sign up, password reset)
-Policy - current_user: manager user admin, anonimous_user
-"""

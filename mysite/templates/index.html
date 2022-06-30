@@ -2,72 +2,77 @@
 {% block content %}
 
 <section class="main-content">
-		<div class="container-xl">
-			<div class="row gy-4">
-				{% if categories %}
-					{% for category, posts in categories_with_posts.items %}
-						<div class="col-md-12 col-sm-6 ">
-							<div class=" clearfix">
-							</div>
+	<div class="container-xl">
+		<div class="row gy-4">
+			{% if categories %}
+				{% for category, posts in categories_with_posts.items %}
+					<div class="col-md-12 col-sm-6 ">
+						<div class=" clearfix">
 						</div>
-							<div class="padding-30 rounded bordered">
-								<div class="row gy-5">
-									{% if posts %}
-										{% for post in posts %}
-											{% if forloop.first %}
-												<div class="col-sm-6">
-													<!-- post first-->
-													<div class="post">
-														<div class="thumb rounded">
-															<a href="{% url 'category:detail' category.id %}" class="category-badge position-absolute">{{ category.name }}</a>
-															<span class="post-format">
-																<i class="icon-picture"></i>
-															</span>
-															<a href="{% url 'post:detail' post.id %}">
-																<div class="inner">
-																	<img src="/media/{{ post.image }}" alt="{{ post.title }}">
-																</div>
-															</a>
-														</div>
+					</div>
+						<div class="padding-30 rounded bordered">
+							<div class="row gy-5">
+								{% if posts %}
+									{% for post in posts %}
+										{% if forloop.first %}
+											<div class="col-sm-6">
+												<!-- post first-->
+												<div class="post">
+													<div class="thumb rounded">
+														<a href="{% url 'category:detail' category.id %}" class="category-badge position-absolute">{{ category.name }}</a>
+														<span class="post-format">
+															<i class="icon-picture"></i>
+														</span>
+														<a href="{% url 'post:detail' post.id %}">
+															<div class="inner">
+																<img src="/media/{{ post.image }}" alt="{{ post.title }}">
+															</div>
+														</a>
+													</div>
+													<ul class="meta list-inline mt-1 mb-0">
+														<li class="list-inline-item">{{ post.author}}</li>
+														<li class="list-inline-item">{{ post.publish }}</li>
+													</ul>
+													<h5 class="post-title mb-3 mt-3"><a href="{% url 'post:detail' post.id %}">{{ post.title }}</a></h5>
+													<p class="excerpt mb-0">{{ post.body|truncatewords:50|truncatechars:250 }}</p>
+												</div>
+											</div>
+										<div class="col-sm-6">
+										{% else %}
+											<!-- rest posts -->
+
+												<!-- post -->
+												<div class="post post-list-sm square">
+													<div class="thumb rounded">
+														<a href="blog-single.html">
+															<div class="inner">
+																<img src="/media/{{ post.image }}" alt="{{ post.title }}" />
+															</div>
+														</a>
+													</div>
+													<div class="details clearfix">
+														<h6 class="post-title my-0"><a href="{% url 'post:detail' post.id %}">{{ post.title }}</a></h6>
 														<ul class="meta list-inline mt-1 mb-0">
-															<li class="list-inline-item">{{ post.author}}</li>
 															<li class="list-inline-item">{{ post.publish }}</li>
 														</ul>
-														<h5 class="post-title mb-3 mt-3"><a href="{% url 'post:detail' post.id %}">{{ post.title }}</a></h5>
-														<p class="excerpt mb-0">{{ post.body|truncatewords:50|truncatechars:250 }}</p>
 													</div>
 												</div>
-											<div class="col-sm-6">
-											{% else %}
-												<!-- rest posts -->
 
-													<!-- post -->
-													<div class="post post-list-sm square">
-														<div class="details clearfix">
-															<h6 class="post-title my-0"><a href="{% url 'post:detail' post.id %}">{{ post.title }}</a></h6>
-															<ul class="meta list-inline mt-1 mb-0">
-																<li class="list-inline-item">{{ post.publish }}</li>
-															</ul>
-														</div>
-													</div>
-
-											{% endif %}
-										{% endfor %}
-											</div>
-									{% else %}
-										<p>Нет доступных новостей.</p>
-									{% endif %}
-								</div>
+										{% endif %}
+									{% endfor %}
+										</div>
+								{% else %}
+									<p>Нет доступных новостей.</p>
+								{% endif %}
 							</div>
-					{% endfor %}
-					{% else %}
-						<p>Нет доступных категорий.</p>
-					{% endif %}
-
-
-					<div class="spacer" data-height="50"></div>
-                </div>
-        </div>
+						</div>
+				{% endfor %}
+			{% else %}
+				<p>Нет доступных категорий.</p>
+			{% endif %}
+			<div class="spacer" data-height="50"></div>
+		</div>
+	</div>
 </section>
 
 {% endblock %}

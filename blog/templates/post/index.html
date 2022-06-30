@@ -10,37 +10,37 @@
 	{% endif %}
 	<div class="row">
 		{% if object_list %}
-		{% for post in object_list %}
-			<div class="col-md-12 col-sm-6">
-				<div class="post post-list clearfix">
-					<div class="thumb rounded">
-						<span class="post-format-sm">
-							<i class="icon-picture"></i>
-						</span>
-						<a href="{% url 'post:detail' post.id %}">
-							<div class="inner">
-								{% if post.image %}
-								<img src="/media/{{ post.image }}" alt="post-title">
-								{% else %}
-									<img src="/meida/std_img.jpg" alt="post-title">
-								{% endif %}
-							</div>
-						</a>
-					</div>
-					<div class="details">
-						<ul class="meta list-inline mb-3">
-							<li class="list-inline-item"> {{post.author }} </li>
-							<li class="list-inline-item"><a href='{% url "category:detail" post.category.pk %}'> {{ post.category }} </a></li>
-							<li class="list-inline-item"> {{ post.publish }} </li>
-						</ul>
-						<h5 class="post-title"><a href="{% url 'post:detail' post.id %}">{{ post.title }}</a></h5>
-						<p class="excerpt mb-0"> {{ post.body|truncatewords:50 }} </p>
+			{% for post in object_list %}
+				<div class="col-md-12 col-sm-6">
+					<div class="post post-list clearfix">
+						<div class="thumb rounded">
+							<span class="post-format-sm">
+								<i class="icon-picture"></i>
+							</span>
+							<a href="{% url 'post:detail' post.id %}">
+								<div class="inner">
+									{% if post.image %}
+									<img src="/media/{{ post.image }}" alt="post-title">
+									{% else %}
+										<img src="/meida/std_img.jpg" alt="post-title">
+									{% endif %}
+								</div>
+							</a>
+						</div>
+						<div class="details">
+							<ul class="meta list-inline mb-3">
+								<li class="list-inline-item"> {{post.author }} </li>
+								<li class="list-inline-item"><a href='{% url "category:detail" post.category.pk %}'> {{ post.category }} </a></li>
+								<li class="list-inline-item"> {{ post.publish }} </li>
+							</ul>
+							<h5 class="post-title"><a href="{% url 'post:detail' post.id %}">{{ post.title }}</a></h5>
+							<p class="excerpt mb-0"> {{ post.body|truncatewords:50 }} </p>
+						</div>
 					</div>
 				</div>
-			</div>
-	  	{% endfor %}
+			{% endfor %}
 		{% else %}
-		<p>Нет доступных постов.</p>
+			<p>Нет доступных постов.</p>
 	{% endif %}
 	</div>
 </div>

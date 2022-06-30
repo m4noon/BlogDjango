@@ -2,48 +2,46 @@
 {% block content %}
 <div class="row gx-2 gx-lg-5 justify-content-center">
     <div class="col-md-10 col-lg-8 col-xl-7">
-        <div class="container-sm">
-            <div class="mb-2">
-                <div class="form-control w-100 text-center">
-                     <style type="text/css">
-                       input {
-                       display: block;
-                        border-radius: 25px;
-                        width: 100%;
-                        padding: 8px 24px;
-                        font-size: 18px;
-                        line-height: 1.6;
-                        color: #fe6074;
-                        background-color: #FFF;
-                        background-image: none;
-                        border: solid 2px #fe6074;
-                        -webkit-box-shadow: none;
-                        box-shadow: none;
-                       }
-                       textarea {
-                       display: block;
-                        border-radius: 25px;
-                        width: 100%;
-                        padding: 8px 24px;
-                        font-size: 18px;
-                        line-height: 1.6;
-                        color: #fe6074;
-                        background-color: #FFF;
-                        background-image: none;
-                        border: solid 2px #fe6074;
-                        -webkit-box-shadow: none;
-                        box-shadow: none;
-                       }
-                        label {
-                            color: #000000;
-                        }
-                     </style>
-                    <h1>Редактировать Пост</h1>
-                    <form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
-                     {{ form.as_p }}
-                         <button class="btn btn-default btn-full" type="submit">Сохранить</button>
-                    </form>
-                </div>
+        <div class="mb-2">
+            <div class="form-control w-100 text-center">
+                 <style type="text/css">
+                   input {
+                   display: block;
+                    border-radius: 25px;
+                    width: 100%;
+                    padding: 8px 24px;
+                    font-size: 18px;
+                    line-height: 1.6;
+                    color: #fe6074;
+                    background-color: #FFF;
+                    background-image: none;
+                    border: solid 2px #fe6074;
+                    -webkit-box-shadow: none;
+                    box-shadow: none;
+                   }
+                   textarea {
+                   display: block;
+                    border-radius: 25px;
+                    width: 100%;
+                    padding: 8px 24px;
+                    font-size: 18px;
+                    line-height: 1.6;
+                    color: #fe6074;
+                    background-color: #FFF;
+                    background-image: none;
+                    border: solid 2px #fe6074;
+                    -webkit-box-shadow: none;
+                    box-shadow: none;
+                   }
+                    label {
+                        color: #000000;
+                    }
+                 </style>
+                <h1>Редактировать Пост</h1>
+                <form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+                 {{ form.as_p }}
+                     <button class="btn btn-default btn-full" type="submit">Сохранить</button>
+                </form>
             </div>
         </div>
 	</div>
