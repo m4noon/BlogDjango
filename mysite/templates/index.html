@@ -44,7 +44,7 @@
 												<!-- post -->
 												<div class="post post-list-sm square">
 													<div class="thumb rounded">
-														<a href="blog-single.html">
+														<a href="{% url 'post:detail' post.id %}">
 															<div class="inner">
 																<img src="/media/{{ post.image }}" alt="{{ post.title }}" />
 															</div>
